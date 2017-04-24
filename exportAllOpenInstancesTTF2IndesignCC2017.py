@@ -1,8 +1,8 @@
-#MenuTitle: Export Open Instances to InDesign 1.0
+#MenuTitle: Export Open Instances TTF to InDesign 1.0
 # -*- coding: utf-8 -*-
 
 __doc__="""
-Export all open instances in OTF in Indesign font's folder.
+Export all open instances in TTF in Indesign font's folder.
 """
 
 
@@ -12,10 +12,17 @@ from os.path import expanduser
 # path to the folder where all files will be saved
 home = expanduser("~")
 desktop = '/Desktop/'
+
 # folder = font.familyName
 folder = 'exported_from_glyphs'
 path = home+desktop+folder
-indesign_folder = r'/Applications/Adobe InDesign CC 2015/Fonts/'
+# choose inDesign Version
+indesignVersion = 'Adobe InDesign CC 2017'
+ 
+indesign_folder = r'/Applications/' + indesignVersion + '/Fonts/'
+
+# choose export format "OTF" or "TTF"
+fileFormat = "TTF"
 
 print folder
 
@@ -34,7 +41,7 @@ for files in all_files:
 # check for all open fonts and export all instances to the created folder
 for font in Glyphs.fonts:
 	for instance in font.instances:
-		instance.generate(FontPath = path)
+		instance.generate(Format = fileFormat, FontPath = path) 
 	Glyphs.showNotification('Export fonts', 'The fonts were exported successfully.')
 
 # change the all_files variable to indesign path
@@ -48,4 +55,3 @@ if os.path.exists(indesign_folder+folder):
 	shutil.move(path, indesign_folder)
 else:
 	shutil.move(path, indesign_folder)
-	

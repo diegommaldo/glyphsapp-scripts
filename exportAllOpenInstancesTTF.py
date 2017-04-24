@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __doc__="""
-Export all open instances in OTF.
+Export all open instances in TTF.
 """
 
 import os, glob
@@ -13,6 +13,8 @@ home = expanduser("~")
 desktop = '/Desktop/'
 folder = 'exported_fonts'
 path = home+desktop+folder
+# choose Font Format "TTF" or "OTF"
+fontFormat = "TTF"
 
 # check if the folder already exists. If not, create the folder
 if os.path.exists(path):
@@ -29,7 +31,7 @@ for files in all_files:
 # check for all open fonts and export all instances to the created folder
 for font in Glyphs.fonts:
 	for instance in font.instances:
-		instance.generate(FontPath = path)
+		instance.generate(Format = fontFormat, FontPath = path)
 	Glyphs.showNotification('Export fonts', 'The fonts were exported successfully.')
 
 	
